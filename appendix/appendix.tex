@@ -1,0 +1,53 @@
+\section{Source code for modelling}
+    \vspace{2pt}
+    \begin{boxminted}{bash}
+        # set model windfarm
+        set MaintenanceTypes;
+        set MaintenanceSeverity;
+    \end{boxminted}
+    %\newline
+    \newpage
+    \vspace{2pt}
+    \begin{boxminted}{bash}
+        ## conditions
+        # XP: sufficient XP points to carry out upcoming maintenance tasks 
+        # based on severity
+        s.t. RequiredXP{mt in MaintenanceTypes}: 
+            total_main_req_xp[mt] = (if main_req[mt,"severe"] <> 0 then 
+        
+        ## Objective
+        minimize TotalCosts: 
+            sum{st in StaffTypes, sl in StaffLevels} staff_to_hire[st,sl] * 
+                staff_cost[st,sl] +
+            sum{mt in MaintenanceTypes} (main_material_cost[mt]) * 
+                quantity[mt] ;
+        
+        solve;
+        
+    \end{boxminted}
+    \newpage
+
+\section{Source code of maintenance data file}
+    \vspace{2pt}
+    \begin{boxminted}{bash}
+        # set data maintenance
+        data;
+
+        end;         
+    \end{boxminted}
+    \newpage
+
+\section{Source code of staff data file}
+    \vspace{2pt}
+    \begin{boxminted}{bash}
+        # set data staff
+        data;
+        
+        set StaffTypes :=
+            electric
+            mechanic
+            storage
+            software;
+        
+    \end{boxminted}
+    \newpage
