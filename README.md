@@ -8,10 +8,19 @@ concepts. The second discusses the main differences between software development
 The following final section showcases the Helix Core&trade; version control software.
 
 ## Overview of version control
-...
+A proper version control not only requires a system dedicated to this purpose but also the proper use of the system is 
+necessary. This is affected by the nature of the development project, team composition and internal practices within the 
+development team.
 
 ## Version control in game development
-...
+Game development is a special branch of software development. Teams working on such projects include not only traditional software developers but also relies heavily on multiple teams of graphical artists, animators responsible for the visual effects of the final product so as designers organising game levels and taking care of the possible interactions
+between the game and the players. Furthermore, there might be creative people who are writing the story. All in all, the
+complete game development process can be described with terms from software development and filmmaking.  
+
+Other important aspect of version control in game development is the way teams go about all the different gaming platforms
+currently available on the market. There are games for mobile phones, game consoles and PCs. If the company desires to release the game on several platforms, at some point in time it is necessary to create different main branches for all 
+target platforms and maintain and synchronize all of them simultaneously. This may include also if some assets are only
+applicable to one or another platform versions of the game but not all of them, in this case the given asset or asset changes should not be committed to the main branches of the affected 
 
 ## Setup Helix Core
 ...
