@@ -6,7 +6,7 @@ The paper is structured into three main sections: the first section gives an ove
 concepts. The second discusses the main differences between software development and game development and how these translate into practice when it comes to version control.
 The following final section showcases the Helix Core&trade; version control software.
 
-## Overview of version control
+## Overview of version control concepts
 A proper version control not only requires a system dedicated to this purpose but also the proper use of the system is 
 necessary. This is affected by the nature of the development project, team composition and internal practices within the 
 development team.
@@ -26,7 +26,7 @@ Different branches for different workflows to avoid inflation of repositories (e
 * graphics
 * code
 
-## Version control tools used in game development
+### Version control tools used in game development
 * GiT Large File System
 * Perforce Helix Core
 * Unity Plastic SCM
