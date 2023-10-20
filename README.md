@@ -49,6 +49,31 @@ PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-poli
 UBUNTU_CODENAME=jammy
 ```
 ## Installation of Helix Core Server and Visual
+https://help.perforce.com/helix-core/quickstart/Content/quickstart/admin-install-linux.html
+```
+
+$ wget https://package.perforce.com/perforce.pubkey
+$ gpg -n --import --import-options import-show perforce.pubkey
+$ gpg -n --import --import-options import-show perforce.pubkey | grep -q "E58131C0AEA7B082C6DC4C937123CB760FF18869" && echo "true"
+$ wget -qO - https://package.perforce.com/perforce.pubkey | sudo apt-key add -
+$ sudo nano /etc/apt/sources.list.d/perforce.list
+
+# add to the file
+deb http://package.perforce.com/apt/ubuntu focal release
+
+$ sudo apt-get update
+$ sudo apt-get install helix-p4d
+$ sudo /opt/perforce/sbin/configure-helix-p4d.sh
+
+# download p4v (visual interface)
+# https://www.perforce.com/downloads/helix-visual-client-p4v
+
+$ export P4PORT=ssl:1666
+$ export P4USER=super
+$ echo 'export PATH=${PATH}:~/perforce/p4v-2023.3.2495381/bin' >> ~/.bashrc
+$ p4 login
+$ p4v
+```
 
 ## Using Helix Core with Godot game engine
 [Godot Docs](https://docs.godotengine.org/en/stable/)
