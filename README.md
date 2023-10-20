@@ -49,7 +49,8 @@ PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-poli
 UBUNTU_CODENAME=jammy
 ```
 ## Installation of Helix Core Server and Visual
-https://help.perforce.com/helix-core/quickstart/Content/quickstart/admin-install-linux.html
+[Helix](https://help.perforce.com/helix-core/quickstart/Content/quickstart/admin-install-linux.html)  
+\cite{Helix}
 ```
 
 $ wget https://package.perforce.com/perforce.pubkey
