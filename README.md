@@ -11,7 +11,9 @@ A proper version control not only requires a system dedicated to this purpose bu
 necessary. This is affected by the nature of the development project, team composition and internal practices within the 
 development team.
 
-## Version control in game development
+## Video game development as software development
+...
+### Version control in game development
 Game development is a special branch of software development. Teams working on such projects include not only traditional software developers but also relies heavily on multiple teams of graphical artists, animators responsible for the visual effects of the final product so as designers organising game levels and taking care of the possible interactions
 between the game and the players. Furthermore, there might be creative people who are writing the story. All in all, the
 complete game development process can be described with terms from software development and other branches like, for example, filmmaking.  
@@ -31,7 +33,7 @@ Different branches for different workflows to avoid inflation of repositories (e
 * Perforce Helix Core
 * Unity Plastic SCM
 
-## Setup Helix Core
+## Version control using Helix Core
 ### Host machine information
 ```
 $ cat /etc/os-release
