@@ -1,5 +1,69 @@
 \section{Version control using Helix Core\textsuperscript{\texttrademark}}
-    \subsection{Subsection01}
-    ...
+In this section, a very basic 2D game is created with the game engine Godot. The development process is version 
+controlled using the Helix Core application to demonstrate the major steps and show the differences compared to 
+traditional SW development workflow.
 
-    \subsection{Subsection02}
+\subsection{Setup Helix Core and Godot}
+The setup of Helix Core follows the instructions from the 
+\href{https://help.perforce.com/helix-core/quickstart/Content/quickstart/admin-install-linux.html}{\color{blue}{Helix Core Server Administrator Guide}}
+relevant for Linux (Ubuntu) systems. The following commands were issued for setting up the version control application, as 
+can be found in the aformentioned documentation.
+\begin{enumerate}
+    \item Download perforce public key
+    \begin{verbatim}
+        $ wget https://package.perforce.com/perforce.pubkey
+    \end{verbatim}
+    \item Obtain the fingerprint of the public key and verify
+    \begin{verbatim}
+        $ gpg -n --import --import-options import-show perforce.pubkey
+        $ gpg -n --import --import-options import-show perforce.pubkey | 
+        grep -q "E58131C0AEA7B082C6DC4C937123CB760FF18869" && echo "true"
+    \end{verbatim}
+    \item Add the public key to your keyring
+    \begin{verbatim}
+        $ wget -qO - https://package.perforce.com/perforce.pubkey | 
+        sudo apt-key add -
+    \end{verbatim}
+    \item Create a new file for the Perforce repository
+    \begin{verbatim}
+        $ sudo nano /etc/apt/sources.list.d/perforce.list
+    \end{verbatim}
+    \item In the new file, input the following line
+    \begin{verbatim}
+        deb http://package.perforce.com/apt/ubuntu focal release
+    \end{verbatim}
+    \item Update machine and install Helix Core
+    \begin{verbatim}
+        $ sudo apt-get update
+        $ sudo apt-get install helix-p4d
+    \end{verbatim}
+    \item Run configure file
+    \begin{verbatim}
+        $ sudo /opt/perforce/sbin/configure-helix-p4d.sh
+    \end{verbatim}
+    \item Download visual interface (p4v) from 
+    \href{https://www.perforce.com/downloads/helix-visual-client-p4v}{\color{blue} Download Page}
+    \item Additional config steps
+    \begin{verbatim}
+        $ export P4PORT=ssl:1666
+        $ export P4USER=super
+        # add the following line to ~/.bashrc
+        export PATH=${PATH}:~/perforce/p4v-2023.3.2495381/bin
+    \end{verbatim}
+    \item Login and start p4v
+    \begin{verbatim}
+        $ p4 login
+        $ p4v # launches GUI
+    \end{verbatim}
+\end{enumerate}
+Having done the above steps, the GUI can be launched bringing up the following screen:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{p4vlogin20231029.png}
+      \caption{p4v login}
+      \label{fig:p4v login}
+\end{figure}
+
+
+\subsection{Development and version control}
+...
