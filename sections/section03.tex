@@ -4,7 +4,7 @@ controlled using the Helix Core application to demonstrate the major steps and s
 traditional SW development workflow.
 \begin{itemize}
     \item centralized version control system: files are maintained on centralized server
-    \item files are stored in depos: typically 1 depo per project
+    \item files are stored in depots: typically 1 depot per project
     \item workspace: mapping of relevant files between local machine and server
 \end{itemize}
 
@@ -133,22 +133,49 @@ After downloading and unpacking, Godot is ready to use:
 \end{figure}
 
 \subsection{Development and version control}
-\begin{itemize}
-    \item 2D game using 
-    \href{https://docs.godotengine.org/en/stable/getting_started/first_2d_game/index.html}{\color{blue}Godot 2D game instructions}
-    \item create empty godot project
-    \item setup workspace for version control with perforce and initial commit
-    \item follow development steps with version control
-\end{itemize}
+%\begin{itemize}
+%    \item 2D game using 
+%    \href{https://docs.godotengine.org/en/stable/getting_started/first_2d_game/index.html}{\color{blue}Godot 2D game instructions}
+%    \item create empty godot project
+%    \item setup workspace for version control with perforce and initial commit
+%    \item follow development steps with version control
+%\end{itemize}
+The final step before the start of the development is to prepare the server depot and local workspace areas, connect 
+and initialize them by adding the first version of files from the Godot project. 
 The following section details the development steps of a very simple 2D game based on instructions from the Godot 
 tutorial at \href{https://docs.godotengine.org/en/stable/getting_started/first_2d_game/index.html}{\color{blue}Godot 2D game instructions}
+using Perforce's Helix Core as version control system.
 \begin{enumerate}
-    \item Login to perforce. Run from terminal:
+    \item First, start by setting up a new depot on the server. Login to perforce. Run from terminal:
         \begin{verbatim}
             $ p4 login
             $ p4v
         \end{verbatim}
     \item Choose Tools {$=>$} Administration (or press CTRL+SHIFT+A). This brings up Helix Admin.
     \item From Helix Admin, File {$=>$} New {$=>$} Depot. Enter a name for the depot and choose local depot then
-    press \colorbox{blue!30}{OK}. Finally close Helix Admin.
+    press \colorbox{blue!30}{OK}. The new empty depot is created on the server. Finally, close Helix Admin.
+    \item Next, a new workspace has to be created in p4v: click View => Workspaces, right click on blank area on the
+    right side when the Workspaces tab is active, click on new workspace. Instead of clicking, just press CTRL+N.
+    \item Workspace name and root need to be given. The former usually follows the naming convention of 
+    \textit{$<$user$>$\_$<$machine\_name$>$\_$<$project\_name$>$} which becomes in my case 
+    \textit{super\_lefodor-HP\_godot2d}. The latter is set to any location on the local machine that ensures convenient
+    working with the repository.
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\textwidth]{new-workspace.png}
+          \caption{new-workspace}
+          \label{fig:new-workspace}
+    \end{figure}
+    Right click on all depots that are not required in the repository => click Clear. After this step, only depot godot2d
+    should have green pipe next to it. Then click on OK to create new workspace.
+    \item In case the depot and workspace are empty, a pop-up window appears asking to add files to the server. Select
+    the files/folders to be added and click Finish. This step should also create a changelist that allows synchronisation
+    and version controlling of the content between the workspace and the server area. If this is not done automatically,
+    the changelist needs to be to the workspace manually: select the Pending tab on the right side and Workspace on left
+    side panel of the screen and select new pending changelist (by right clicking on blank area in the right side panel)
+    then select and drag the files to be tracked from the left hand side panel to the new changelist. Finally, submit the
+    changelist after having added description.
+
+    Having done the final step, the folder is ready to be shared and version controlled via the server depot and the 
+    local workspace contents, currently 3 files are part of the repository of \textit{godot2d}.
 \end{enumerate}
