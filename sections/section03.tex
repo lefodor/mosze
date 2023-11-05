@@ -37,6 +37,8 @@ can be found in the aformentioned documentation.
     \begin{verbatim}
         deb http://package.perforce.com/apt/ubuntu focal release
     \end{verbatim}
+    Make sure the version matches the Linux/Ubuntu version of the machine's system. E.g 'focal' needs to be replaced by
+    'jammy' if the most recent Linux/Ubuntu LTS version is running on the machine.
     \item Update machine and install Helix Core
     \begin{verbatim}
         $ sudo apt-get update
@@ -46,9 +48,47 @@ can be found in the aformentioned documentation.
     \begin{verbatim}
         $ sudo /opt/perforce/sbin/configure-helix-p4d.sh
     \end{verbatim}
+    During the installation process, I had problems with this step when I tried to remove and install the helix-p4d
+    package. The correct way of removing all related data is summarised as follows:
+    \begin{itemize}
+        \item Remove package
+        \begin{verbatim}
+            $ sudo apt-get remove helix-p4dctl
+            $ sudo apt-get purge helix-p4dctl
+        \end{verbatim}
+        \item For some reasons, the file \colorbox{blue!30}{/etc/perforce/p4dctl.conf.d/p4d.template} was missing after
+        these steps. The file was recreated with below content (downloaded from \href{https://portal.perforce.com/s/article/15056}{\color{blue}{here}} 
+        and slightly modified) and the install process worked again.
+        \begin{verbatim}
+            p4d %NAME%
+            {
+                Owner    =    perforce
+                Execute  =    /opt/perforce/sbin/p4d
+                Umask    =    077
+
+                # Enabled by default.
+                Enabled  =    true
+
+                Environment
+                {
+                    P4ROOT    =    %ROOT%
+                    P4SSLDIR  =    ssl
+                    PATH      =    /bin:/usr/bin:/usr/local/bin:...
+                    /opt/perforce/bin:/opt/perforce/sbin
+
+                # Enables nightly checkpoint routine
+                # This should *not* be considered a complete backup...
+                solution
+                MAINTENANCE =     true
+                }
+            }
+        \end{verbatim}
+    \end{itemize}
     \item Download visual interface (p4v) from 
     \href{https://www.perforce.com/downloads/helix-visual-client-p4v}{\color{blue} Download Page}.
-    P4v is the client application commnicating with the server. Server in this case is created on local machine.
+    P4v is the client application commnicating with the server. Server in this case is created on local machine. In case of
+    reinstall, the P4V client might also need to be unpacked again so that the already created workspaces do not block
+    the execution.
     \item Additional config steps
     \begin{verbatim}
         $ export P4PORT=ssl:1666
@@ -109,5 +149,6 @@ tutorial at \href{https://docs.godotengine.org/en/stable/getting_started/first_2
             $ p4v
         \end{verbatim}
     \item Choose Tools {$=>$} Administration (or press CTRL+SHIFT+A). This brings up Helix Admin.
-    \item From Helix Admin, File {$=>$} New {$=>$} Depot
+    \item From Helix Admin, File {$=>$} New {$=>$} Depot. Enter a name for the depot and choose local depot then
+    press \colorbox{blue!30}{OK}. Finally close Helix Admin.
 \end{enumerate}
