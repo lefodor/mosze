@@ -1,15 +1,37 @@
 \section{Overview of version control concepts}
+The main goals of version control systems can be summarized as follows:
+\begin{itemize}
+    \item keep track of change history
+    \begin{itemize}
+        \item revert code base to previous state
+        \item identify first occurrence of bugs and change that introduced them
+    \end{itemize} 
+    \item maintain several version of the code, e.g. PRODUCTION, RELEASE CANDIDATE, DEVELOPMENT. This is particulary
+    useful when some features have already been developed but for some reasons they are planned to be released later in 
+    the future.
+    \item allow several people/teams working on the same code base simultaneously. Currently, any commercial software
+    product requires the effective collaboration of many programmers (even hundreds), it would become swiftly chaotic
+    even impossible without a tool that can handle code changes from so many sources.
+\end{itemize}
 The most straightforward distinction between version control systems is based on whether they treat code repository in 
 a centralized or distributed manner. The former designates an authorative data store and all activies/changes are 
 aligned with reference to this central hub. In the latter case, however, there is no authorative central repository.
-Code repositories are aligned by activies called merges.  
-Centralized version control system (CVCS) usually implements with the following workflow:
+Code repositories are aligned by activies called merges when changes are combined creating a new repository version 
+incorporating all modifications of the code base. \\
+Centralized version control system (CVCS) usually implements the following workflow:
 \begin{itemize}
     \item check out code repository from central location (usually from server) with all the changes made by other
     colleagues
     \item implement own changes
     \item commit changes, in other words, upload own changes so that others can work with the most up to date version of
     the repository.
+\end{itemize}
+DVCS works with the following typical workflow:
+\begin{itemize}
+    \item clone repository with full history of changes
+    \item make own changes
+    \item commit changes to local repository
+    \item push changes to DVCS
 \end{itemize}
     \subsection{Subsection01}
     ...
