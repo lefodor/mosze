@@ -128,7 +128,7 @@ After downloading and unpacking, Godot is ready to use:
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{godotopen.png}
-      \caption{godot}
+      \caption{godot editor}
       \label{fig:godot}
 \end{figure}
 
@@ -152,9 +152,60 @@ using Perforce's Helix Core as version control system.
             $ p4v
         \end{verbatim}
     \item Choose Tools {$=>$} Administration (or press CTRL+SHIFT+A). This brings up Helix Admin.
-    \item From Helix Admin, File {$=>$} New {$=>$} Depot. Enter a name for the depot and choose local depot then
-    press \colorbox{blue!30}{OK}. The new empty depot is created on the server. Finally, close Helix Admin.
-    \item Next, a new workspace has to be created in p4v: click View => Workspaces, right click on blank area on the
+    \item From Helix Admin, File {$=>$} New {$=>$} Depot. Enter a name for the depot (\textit{godot2d} in my case), 
+    choose stream as depot type then press \colorbox{blue!30}{OK}. The new empty depot is created on the server. 
+    Finally, close Helix Admin.
+    \item Create TypeMap. TypeMap tells Perforce how to treate different type of files and what rules should be applied
+    on the type of files when being edited. E.g. some binary files cannot be modified if someone else is also working 
+    on it as conflicts cannot be resolved and in such cases either one or the other version of the file has to be retained 
+    and the other will be dropped. For these files, it is better to use the \textit{+l} modifier which automatically
+    locks the file so multiple users are not allowed to edit the file at the same time.
+    \begin{verbatim}
+        TypeMap:
+            binary //....meta
+            binary+wS //....exe
+            +l //project_a/....obj
+    \end{verbatim}
+    The '...' symbol is a recursive wildcard in Perforce ('*' is non-recursive wildcard).
+    In this example, all files ending with .meta should be treated as binary, the .exe files should be treated as binary
+    with the 'w' and 'S' modifiers (always writable and using latest revision), whereas all .obj files in the project\_a
+    folder should be locked. To create a TypeMap, open a terminal and type the following command:
+    \begin{verbatim}
+        $ p4 typemap
+    \end{verbatim}
+    The command brings up a typemap template that is already defined for several file types. Unfortunately,
+    the default editor for p4v is not the most user-friendly, so it makes sense to switch the editor before calling the
+    previous command. To switch the editor to nano, type:
+    \begin{verbatim}
+        $ p4 set P4EDITOR=nano
+    \end{verbatim}
+    Now, it is much easier to make changes to the template typemap.
+    The following typemap will be used for the project at hand:
+    \begin{verbatim}
+        Typemap:
+            binary+lS //....png
+            text+lS //....import
+            text+w //....gd
+            text+w //....tscn
+            binary //....godot
+    \end{verbatim}
+    \item Next up, a stream is to be created. Streams are useful assets in Perforce as they allow different
+    teams to work on the project without distracting each other. E.g. 3D modellers can work on one stream and developers 
+    on another one and once they are both happy with the outcome, the development stream can be merged to the 3D modellers'
+    stream to make the changes available to them. In this example, only one stream will be created.
+    To do this, click the Add tab button on the right pane and select Stream Graph. Then right click in any blank space
+    and select New stream. Populate the input fields: \\
+    Stream name: main \\
+    Stream type: mainline \\
+    Depot: godot2d \\
+    Uncheck Create Workspace and Populate checkbox to avoid these automatic steps. These will be executed manually.
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\textwidth]{create-stream.png}
+          \caption{new stream}
+          \label{fig:new-stream}
+    \end{figure}
+    \item Next, a new workspace has to be created in p4v: click View {$=>$} Workspaces, right click on blank area on the
     right side when the Workspaces tab is active, click on new workspace. Instead of clicking, just press CTRL+N.
     \item Workspace name and root need to be given. The former usually follows the naming convention of 
     \textit{$<$user$>$\_$<$machine\_name$>$\_$<$project\_name$>$} which becomes in my case 

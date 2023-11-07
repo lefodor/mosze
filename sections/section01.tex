@@ -1,11 +1,9 @@
 \section{Overview of version control concepts}
 The main goals of version control systems can be summarized as follows:
 \begin{itemize}
-    \item keep track of change history
-    \begin{itemize}
-        \item revert code base to previous state
-        \item identify first occurrence of bugs and change that introduced them
-    \end{itemize} 
+    \item keep track of change history. By keeping the history of changes on the code base, it becomes possible to revert
+    to a previous state. Furthermore, the identification of bugs' first occurrence and the changeset that introduced them
+    will also be possible.
     \item maintain several version of the code, e.g. PRODUCTION, RELEASE CANDIDATE, DEVELOPMENT. This is particulary
     useful when some features have already been developed but for some reasons they are planned to be released later in 
     the future.
@@ -13,6 +11,8 @@ The main goals of version control systems can be summarized as follows:
     product requires the effective collaboration of many programmers (even hundreds), it would become swiftly chaotic
     even impossible without a tool that can handle code changes from so many sources.
 \end{itemize}
+To satisfy the above mentioned needs, version control applications have been developed that differ from each other in
+some or many aspects. \\
 The most straightforward distinction between version control systems is based on whether they treat code repository in 
 a centralized or distributed manner. The former designates an authorative data store and all activies/changes are 
 aligned with reference to this central hub. In the latter case, however, there is no authorative central repository.
