@@ -210,22 +210,32 @@ using Perforce's Helix Core as version control system.
     \item Workspace name and root need to be given. The former usually follows the naming convention of 
     \textit{$<$user$>$\_$<$machine\_name$>$\_$<$project\_name$>$} which becomes in my case 
     \textit{super\_lefodor-HP\_godot2d}. The latter is set to any location on the local machine that ensures convenient
-    working with the repository.
+    working with the repository. Additionally, the stream is also to be filled out.
     \begin{figure}[H]
         \centering
-        \includegraphics[width=\textwidth]{new-workspace.png}
+        \includegraphics[width=\textwidth]{new-workspace2.png}
           \caption{new-workspace}
           \label{fig:new-workspace}
     \end{figure}
-    Right click on all depots that are not required in the repository => click Clear. After this step, only depot godot2d
+    Right click on all depots that are not required in the repository {$=>$} click Clear. After this step, only depot godot2d
     should have green pipe next to it. Then click on OK to create new workspace.
-    \item In case the depot and workspace are empty, a pop-up window appears asking to add files to the server. Select
-    the files/folders to be added and click Finish. This step should also create a changelist that allows synchronisation
-    and version controlling of the content between the workspace and the server area. If this is not done automatically,
-    the changelist needs to be to the workspace manually: select the Pending tab on the right side and Workspace on left
-    side panel of the screen and select new pending changelist (by right clicking on blank area in the right side panel)
-    then select and drag the files to be tracked from the left hand side panel to the new changelist. Finally, submit the
-    changelist after having added description.
+    \item Similarly to other version control systems, it is also possible to define a file that specifies files that are
+    not subject to version control. In a new terminal window:
+    \begin{verbatim}
+        $ p4 set P4IGNORE=.p4ignore
+        $ touch /home/lefodor/perforce/super_lefodor-HP_godot2d/.p4ignore
+    \end{verbatim}
+    In P4V, on the left pane right click on the file and click \textbf{Mark for Add} to add it to the default changelist, 
+    and then hit \textbf{Submit} in the upper button bar while the file is selected.
+    \item Add files to workspace. Copy blank Godot project folder to workspace root folder. Refresh P4V if needed to see
+    the newly copied files in the left pane. Add the files to the default changelist and hit \textbf{Submit}. Only the 
+    non-hidden files have been added to the workspace for version controll (note the small green icon next to files).
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\textwidth]{init-workspace.png}
+          \caption{init-workspace}
+          \label{fig:init-workspace}
+    \end{figure}
 
     Having done the final step, the folder is ready to be shared and version controlled via the server depot and the 
     local workspace contents, currently 3 files are part of the repository of \textit{godot2d}.
