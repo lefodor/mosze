@@ -132,7 +132,7 @@ After downloading and unpacking, Godot is ready to use:
       \label{fig:godot}
 \end{figure}
 
-\subsection{Development and version control}
+\subsection{Setup version control for development project}
 %\begin{itemize}
 %    \item 2D game using 
 %    \href{https://docs.godotengine.org/en/stable/getting_started/first_2d_game/index.html}{\color{blue}Godot 2D game instructions}
@@ -239,4 +239,67 @@ using Perforce's Helix Core as version control system.
 
     Having done the final step, the folder is ready to be shared and version controlled via the server depot and the 
     local workspace contents, currently 3 files are part of the repository of \textit{godot2d}.
+\end{enumerate}
+\subsection{Steps of game development}
+Now, that the version control system, the game engine and the connections between the two are set up, the
+development project can finally kick off. The steps in this sections are following the guide 
+\href{https://docs.godotengine.org/en/stable/getting_started/first_2d_game/index.html}{\color{blue}Godot 2D game instructions}.
+\begin{enumerate}
+    \item Download assets and add them to version controll. Files are downloaded from 
+    \href{https://github.com/godotengine/godot-docs-project-starters/releases/download/latest-4.x/dodge_the_creeps_2d_assets.zip}{\color{blue}here}.
+    There are additional two more folders called \textit{art} and \textit{fonts} extracted and added to project folder.
+    They need to be added to version control by selecting them, click \textbf{Add} button and then \textbf{Submit}.
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\textwidth]{add-assets-to-vc.png}
+          \caption{add assets to VC}
+          \label{fig:add-assets-to-vc}
+    \end{figure}
+    \item Changes to \textit{.godot} project file
+    \begin{itemize}
+        \item Change project settings: click \textbf{Project} {$=>$} \textbf{Project Settings}. Under \textbf{Display/Window}
+        change Viewport Width and Height to 480 and 720 respectively in the Size section and set Mode to \textit{canvas\_items}
+        in Stretch section. In Perforce, the following changes can be observed: when \textit{godot2d} folder is checked out
+        all the files are added to the changelist. When the changelist is submitted, new revision record shows up on the 
+        right side pane, under History button. With right click on the revision, list of changed files can be opened (by
+        clicking on \textit{View submitted changelist}) 
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=\textwidth]{changes-in-perforce.png}
+              \caption{project file changes in perforce}
+              \label{fig:changes-in-perforce}
+        \end{figure}
+    \end{itemize}
+    \item Create player scene. The player scene contains all objects related to the character controlled by the player.
+    \begin{itemize}
+        \item Click on \textbf{Other node} button and add an \textit{Area2D} node, rename it to player and save as 
+        \textit{player.tscn}.
+        \item Add sprite to player. Add a child node \textit{AnimatedSprite2D} to the player node and click the sprite frame
+        property under \textit{Animation} section. Here, we can create 2 animations, the first is called 'up', and add 
+        animation frames \textit{playerGrey\_up1.png} and \textit{playerGrey\_up2.png} from the downloaded asset folder.
+        Secondly, add another animation called 'walk' with frames 
+        \textit{playerGrey\_walk1.png} and \textit{playerGrey\_walk2.png}. Rescale by setting both x and y parameters under 
+        \textit{Node2D/Transform} to 0.5.
+        \item Add collision shape. Add a \textit{CollisionShape2D} as child node to player node. This will make possible
+        for the character to collide with other objects. Select \textit{CapsuleShape2D} for shape property under 
+        \textit{CollisionShape2D} at the right hand-side pane of the screen and adapt the size of the capsule on the 
+        graphical interface so that it covers the animated sprite.
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=\textwidth]{player-collision-shape.png}
+              \caption{adding collision shape to player}
+              \label{fig:player-collision-shape}
+        \end{figure}
+        \item After submitting in P4V, the changelist looks as follows for the above changes. Do not forget to add 
+        the new \textit{player.tscn} file to the version controlled workspace.
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=\textwidth]{create-player-scene.png}
+              \caption{p4v for create-player-scene}
+              \label{fig:create-player-scene}
+        \end{figure}
+        \item More detailed steps can be found at 
+        \href{https://docs.godotengine.org/en/stable/getting_started/first_2d_game/02.player_scene.html}{\color{blue}here}.
+    \end{itemize}
+    \item Coding playe scene.
 \end{enumerate}
