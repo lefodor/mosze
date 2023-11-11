@@ -22,7 +22,7 @@ A new development stream (branch) has been created:
 From this point onwards, all changes are to be made on the development stream and later merged back to the more stable
 main stream. Also, changes need to be made to the workspace related to this branch and not on the one linked to main.
 
-\subsection{Development steps cont'd}
+\subsection{Coding the player scene and creating the enemy}
 \begin{enumerate}[resume]
   \item \href{https://docs.godotengine.org/en/stable/getting_started/first_2d_game/03.coding_the_player.html}{\color{blue}Coding player scene}. 
   Add script to player scene. Check for input, move in direction, play the animation related
@@ -88,7 +88,6 @@ main stream. Also, changes need to be made to the workspace related to this bran
       position = pos
       show()
       $CollisionShape2D.disabled = false
-
   \end{verbatim} 
   After this step, it is already possible to run the game by pressing F6 and use the arrow buttons to control the player's
   character up/down and left/right.
@@ -119,3 +118,63 @@ Right click on the target stream {$=>$} \textit{Copy files to main}. In the popu
 has to be activated then click on \textit{Copy} to copy the files. Finally, the in the main stream, the changes from the 
 copy operation has to be submitted. With these steps, changes from the development branch are also saved in the main branch
 and branches are synchronised.
+\begin{enumerate}[resume]
+  \item \href{https://docs.godotengine.org/en/stable/getting_started/first_2d_game/04.creating_the_enemy.html}{\color{blue}Creating the enemy}
+  Create enemy scene. Add behaviour and movement.
+  Create a new scene called "Mob", which will be instanced as many times as wished, in random locations of the screen and 
+  move in randomly selected directions. Click \textbf{Scene} {$=>$} \textbf{New Scene} and add the following structure:
+  \begin{itemize}
+    \item RigidBody2D (called Mob)
+      \begin{itemize}
+        \item AnimatedSprite2D
+        \item CollisionShape2D
+        \item VisibleOnScreenNotifier2D
+      \end{itemize}
+  \end{itemize}
+  \begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{create-enemy.png}
+      \caption{create enemy}
+      \label{fig:create-enemy}
+\end{figure}
+Select the Mob scene and set the to \textit{Gravity scale} in the \textit{Inspector} tab to 0. 
+In section \textit{CollisionObject2D}, under \textbf{Collision}, in property \textbf{Mask} uncheck the 1.
+Setup the animation for the enemy similarly as in \ref{animation}. There are three animations to be defined:
+\textit{fly}, \textit{swim} and \textit{walk}. Drag the corresponding sprites for each of them, set the FPS to 3.
+In the \textit{Inspector} window, under \textbf{Node2D/Transform}, set \textit{Rotation} to 90 and \textit{Scale}
+to 0.75.
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.5]{animation-enemy.png}
+    \caption{animation enemy}
+    \label{fig:animation-enemy}
+\end{figure}
+Finally, define \textit{CapsuleShape} for the collision shape's \textit{Shape} property. Add a ew script to the Mob scene
+with the below content and save the script as \textit{mob.gd}:
+\begin{verbatim}
+  extends RigidBody2D
+
+
+  # Called when the node enters the scene tree for the first time.
+  func _ready():
+	  var mob_types = $AnimatedSprite2D.sprite_frames.get_animation_names()
+	  $AnimatedSprite2D.play(mob_types[randi() % mob_types.size()])
+
+
+  # Called every frame. 'delta' is the elapsed time since the previous frame.
+  func _process(_delta):
+	  pass
+
+  func _on_visible_on_screen_enabler_2d_screen_exited():
+	  queue_free()
+\end{verbatim}
+\end{enumerate}
+Regarding P4V, same steps have to be done as previously when player scene and script were added (add new files,
+submit changes and copy files from dev stream if sync is needed at this moment). The \textit{dev} workspace looks as 
+follows after creating and adding the enemy.
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{workspace-after-enemy-creation.png}
+    \caption{workspace after enemy creation}
+    \label{fig:workspace-after-enemy-creation}
+\end{figure}
