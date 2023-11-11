@@ -20,9 +20,63 @@ A new development stream (branch) has been created:
       \label{fig:new-branch-dev1.0}
 \end{figure}
 From this point onwards, all changes are to be made on the development stream and later merged back to the more stable
-main stream.
+main stream. Also, changes need to be made to the workspace related to this branch and not on the one linked to main.
 
 \subsection{Development steps cont'd}
 \begin{enumerate}[resume]
-    \item Coding player scene.
+  \item \href{https://docs.godotengine.org/en/stable/getting_started/first_2d_game/03.coding_the_player.html}{\color{blue}Coding player scene}. 
+  Add script to player scene. Check for input, move in direction, play the animation related
+  to the movement.
+  Add script to player by selecting the scene and click on the "Attach Script" button.
+  \begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{add-script-to-player.png}
+      \caption{add script to player}
+      \label{fig:add-script-to-player}
+  \end{figure}
+  The added script (\textit{player.gd}) should look like as below:
+  \begin{verbatim}
+    extends Area2D
+
+    @export var speed = 400 # How fast the player will move (pixels/sec).
+    var screen_size # Size of the game window.
+    
+    # Called when the node enters the scene tree for the first time.
+    func _ready():
+      screen_size = get_viewport_rect().size
+    
+    
+    # Called every frame. 'delta' is the elapsed time since the previous frame.
+    func _process(delta):
+      var velocity = Vector2.ZERO # The player's movement vector.
+      if Input.is_action_pressed("ui_right"):
+        velocity.x += 1
+      if Input.is_action_pressed("ui_left"):
+        velocity.x -= 1
+      if Input.is_action_pressed("ui_down"):
+        velocity.y += 1
+      if Input.is_action_pressed("ui_up"):
+        velocity.y -= 1
+    
+      if velocity.length() > 0:
+        velocity = velocity.normalized() * speed
+        $AnimatedSprite2D.play()
+      else:
+        $AnimatedSprite2D.stop()
+      
+      if velocity.x != 0:
+        $AnimatedSprite2D.animation = "walk"
+        $AnimatedSprite2D.flip_v = false
+        # See the note below about boolean assignment.
+        $AnimatedSprite2D.flip_h = velocity.x < 0
+      elif velocity.y != 0:
+        $AnimatedSprite2D.animation = "up"
+        $AnimatedSprite2D.flip_v = velocity.y > 0
+      
+      position += velocity * delta
+      position = position.clamp(Vector2.ZERO, screen_size)    
+
+  \end{verbatim} 
+  After this step, it is already possible to run the game by pressing F6 and use the arrow buttons to control the player's
+  character up/down and left/right.
 \end{enumerate}
