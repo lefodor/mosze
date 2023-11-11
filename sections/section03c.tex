@@ -9,30 +9,29 @@ steps to setup streams in Perforce
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{new-stream-for-branching.png}
-      \caption{p4v new stream for branching}
-      \label{fig:new-stream-for-branching}
+    \caption{p4v new stream for branching}
+    \label{fig:new-stream-for-branching}
 \end{figure}
 A new development stream (branch) has been created:
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{new-branch-dev1.0.png}
-      \caption{new stream (branch) dev1.0}
-      \label{fig:new-branch-dev1.0}
+    \caption{new stream (branch) dev1.0}
+    \label{fig:new-branch-dev1.0}
 \end{figure}
 From this point onwards, all changes are to be made on the development stream and later merged back to the more stable
 main stream. Also, changes need to be made to the workspace related to this branch and not on the one linked to main.
 
 \subsection{Coding the player scene and creating the enemy}
-\begin{enumerate}[resume]
-  \item \href{https://docs.godotengine.org/en/stable/getting_started/first_2d_game/03.coding_the_player.html}{\color{blue}Coding player scene}. 
-  Add script to player scene. Check for input, move in direction, play the animation related
-  to the movement.
+%\begin{enumerate}[resume]
+  %\item 
+  \href{https://docs.godotengine.org/en/stable/getting_started/first_2d_game/03.coding_the_player.html}{\color{blue}Coding player scene}. 
   Add script to player by selecting the scene and click on the "Attach Script" button.
   \begin{figure}[H]
     \centering
     \includegraphics[scale=0.5]{add-script-to-player.png}
-      \caption{add script to player}
-      \label{fig:add-script-to-player}
+    \caption{add script to player}
+    \label{fig:add-script-to-player}
   \end{figure}
   The added script (\textit{player.gd}) should look like as below:
   \begin{verbatim}
@@ -96,20 +95,21 @@ main stream. Also, changes need to be made to the workspace related to this bran
   \begin{figure}[H]
     \centering
     \includegraphics[scale=0.5]{player-signals.png}
-      \caption{player signals}
-      \label{fig:player-signals}
+    %\setlength{\belowcaptionskip}{-15pt}
+    \caption{player signals}
+    \label{fig:player-signals}
   \end{figure}
   The \textit{body\_entered} signal is connected to the player meaning that if an Area2D object hits the player the signal
   is emitted. By connecting the signal, a function is created (\textit{func \_on\_body\_entered}) in the script file that defines the behaviour upon signal
   emission. The final piece of code (\textit{func start()}) defines the starting position of the player when the game starts.
-\end{enumerate}
+%\end{enumerate}
 The next step in the version control is to merge changes in stream \textit{dev1.0} back to the \textit{main} stream. Currently,
 the Stream Graph in P4V looks like this.
 \begin{figure}[H]
   \centering
   \includegraphics[width=\textwidth]{copy-dev-to-main.png}
-    \caption{copy files from dev to main}
-    \label{fig:copy-dev-to-main}
+  \caption{copy files from dev to main}
+  \label{fig:copy-dev-to-main}
 \end{figure}
 The green arrow means merge or copy operation is available. As for the terminology, "merge" means send changes from the 
 more stable stream (main) to the less stable one (dev) and "copy" means vica versa. This case, only the less stable stream
@@ -118,8 +118,9 @@ Right click on the target stream {$=>$} \textit{Copy files to main}. In the popu
 has to be activated then click on \textit{Copy} to copy the files. Finally, the in the main stream, the changes from the 
 copy operation has to be submitted. With these steps, changes from the development branch are also saved in the main branch
 and branches are synchronised.
-\begin{enumerate}[resume]
-  \item \href{https://docs.godotengine.org/en/stable/getting_started/first_2d_game/04.creating_the_enemy.html}{\color{blue}Creating the enemy}
+%\begin{enumerate}[resume]
+  %\item 
+  \href{https://docs.godotengine.org/en/stable/getting_started/first_2d_game/04.creating_the_enemy.html}{\color{blue}Creating the enemy}
   Create enemy scene. Add behaviour and movement.
   Create a new scene called "Mob", which will be instanced as many times as wished, in random locations of the screen and 
   move in randomly selected directions. Click \textbf{Scene} {$=>$} \textbf{New Scene} and add the following structure:
@@ -134,9 +135,9 @@ and branches are synchronised.
   \begin{figure}[H]
     \centering
     \includegraphics[scale=0.5]{create-enemy.png}
-      \caption{create enemy}
-      \label{fig:create-enemy}
-\end{figure}
+    \caption{create enemy}
+    \label{fig:create-enemy}
+  \end{figure}
 Select the Mob scene and set the to \textit{Gravity scale} in the \textit{Inspector} tab to 0. 
 In section \textit{CollisionObject2D}, under \textbf{Collision}, in property \textbf{Mask} uncheck the 1.
 Setup the animation for the enemy similarly as in \ref{animation}. There are three animations to be defined:
@@ -146,8 +147,9 @@ to 0.75.
 \begin{figure}[H]
   \centering
   \includegraphics[scale=0.5]{animation-enemy.png}
-    \caption{animation enemy}
-    \label{fig:animation-enemy}
+  %\setlength{\belowcaptionskip}{-12pt}
+  \caption{animation enemy}
+  \label{fig:animation-enemy}
 \end{figure}
 Finally, define \textit{CapsuleShape} for the collision shape's \textit{Shape} property. Add a ew script to the Mob scene
 with the below content and save the script as \textit{mob.gd}:
@@ -168,13 +170,13 @@ with the below content and save the script as \textit{mob.gd}:
   func _on_visible_on_screen_enabler_2d_screen_exited():
 	  queue_free()
 \end{verbatim}
-\end{enumerate}
+%\end{enumerate}
 Regarding P4V, same steps have to be done as previously when player scene and script were added (add new files,
 submit changes and copy files from dev stream if sync is needed at this moment). The \textit{dev} workspace looks as 
 follows after creating and adding the enemy.
 \begin{figure}[H]
   \centering
   \includegraphics[width=\textwidth]{workspace-after-enemy-creation.png}
-    \caption{workspace after enemy creation}
-    \label{fig:workspace-after-enemy-creation}
+  \caption{workspace after enemy creation}
+  \label{fig:workspace-after-enemy-creation}
 \end{figure}

@@ -68,8 +68,8 @@ using Perforce's Helix Core as version control system.
     \begin{figure}[H]
         \centering
         \includegraphics[width=\textwidth]{create-stream.png}
-          \caption{new stream}
-          \label{fig:new-stream}
+        \caption{new stream}
+        \label{fig:new-stream}
     \end{figure}
     \item Next, a new workspace has to be created in p4v: click View {$=>$} Workspaces, right click on blank area on the
     right side when the Workspaces tab is active, click on new workspace. Instead of clicking, just press CTRL+N.
@@ -80,8 +80,8 @@ using Perforce's Helix Core as version control system.
     \begin{figure}[H]
         \centering
         \includegraphics[width=\textwidth]{new-workspace2.png}
-          \caption{new-workspace}
-          \label{fig:new-workspace}
+        \caption{new-workspace}
+        \label{fig:new-workspace}
     \end{figure}
     Right click on all depots that are not required in the repository {$=>$} click Clear. After this step, only depot godot2d
     should have green pipe next to it. Then click on OK to create new workspace.
@@ -99,8 +99,8 @@ using Perforce's Helix Core as version control system.
     \begin{figure}[H]
         \centering
         \includegraphics[width=\textwidth]{init-workspace.png}
-          \caption{init-workspace}
-          \label{fig:init-workspace}
+        \caption{init-workspace}
+        \label{fig:init-workspace}
     \end{figure}
 
     Having done the final step, the folder is ready to be shared and version controlled via the server depot and the 
@@ -118,8 +118,8 @@ development project can finally kick off. The steps in this sections are followi
     \begin{figure}[H]
         \centering
         \includegraphics[width=\textwidth]{add-assets-to-vc.png}
-          \caption{add assets to VC}
-          \label{fig:add-assets-to-vc}
+        \caption{add assets to VC}
+        \label{fig:add-assets-to-vc}
     \end{figure}
     \item Changes to \textit{.godot} project file
     \begin{itemize}
@@ -132,11 +132,13 @@ development project can finally kick off. The steps in this sections are followi
         \begin{figure}[H]
             \centering
             \includegraphics[width=\textwidth]{changes-in-perforce.png}
-              \caption{project file changes in perforce}
-              \label{fig:changes-in-perforce}
+            \setlength{\belowcaptionskip}{-12pt}
+            \caption{project file changes in perforce}
+            \label{fig:changes-in-perforce}
         \end{figure}
     \end{itemize}
-    \item Create player scene. The player scene contains all objects related to the character controlled by the player.
+    \item \href{https://docs.godotengine.org/en/stable/getting_started/first_2d_game/02.player_scene.html}{\color{blue}Create player scene} 
+    The player scene contains all objects related to the character controlled by the player.
     \begin{itemize}
         \item Click on \textbf{Other node} button and add an \textit{Area2D} node, rename it to player and save as 
         \textit{player.tscn}.
@@ -153,18 +155,16 @@ development project can finally kick off. The steps in this sections are followi
         \begin{figure}[H]
             \centering
             \includegraphics[width=\textwidth]{player-collision-shape.png}
-              \caption{adding collision shape to player}
-              \label{fig:player-collision-shape}
+            \caption{adding collision shape to player}
+            \label{fig:player-collision-shape}
         \end{figure}
         \item After submitting in P4V, the changelist looks as follows for the above changes. Do not forget to add 
         the new \textit{player.tscn} file to the version controlled workspace.
         \begin{figure}[H]
             \centering
             \includegraphics[width=\textwidth]{create-player-scene.png}
-              \caption{p4v for create-player-scene}
-              \label{fig:create-player-scene}
+            \caption{p4v for create-player-scene}
+            \label{fig:create-player-scene}
         \end{figure}
-        \item More detailed steps can be found at 
-        \href{https://docs.godotengine.org/en/stable/getting_started/first_2d_game/02.player_scene.html}{\color{blue}here}.
     \end{itemize}
 \end{enumerate}
