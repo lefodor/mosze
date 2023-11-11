@@ -38,6 +38,8 @@ main stream. Also, changes need to be made to the workspace related to this bran
   \begin{verbatim}
     extends Area2D
 
+    signal hit
+
     @export var speed = 400 # How fast the player will move (pixels/sec).
     var screen_size # Size of the game window.
     
@@ -74,9 +76,46 @@ main stream. Also, changes need to be made to the workspace related to this bran
         $AnimatedSprite2D.flip_v = velocity.y > 0
       
       position += velocity * delta
-      position = position.clamp(Vector2.ZERO, screen_size)    
+      position = position.clamp(Vector2.ZERO, screen_size)  
+      
+    func _on_body_entered(_body):
+      hide() # Player disappears after being hit.
+      hit.emit()
+      # Must be deferred as we can't change physics properties on a physics callback.
+      $CollisionShape2D.set_deferred("disabled", true)
+      
+    func start(pos):
+      position = pos
+      show()
+      $CollisionShape2D.disabled = false
 
   \end{verbatim} 
   After this step, it is already possible to run the game by pressing F6 and use the arrow buttons to control the player's
   character up/down and left/right.
+  Final step of this point is the preparation for collisions. The \textit{signal hit} line generates a so called signal.
+  Signals are emitted upon certain events, in this case, when the player gets hit.
+  \begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{player-signals.png}
+      \caption{player signals}
+      \label{fig:player-signals}
+  \end{figure}
+  The \textit{body\_entered} signal is connected to the player meaning that if an Area2D object hits the player the signal
+  is emitted. By connecting the signal, a function is created (\textit{func \_on\_body\_entered}) in the script file that defines the behaviour upon signal
+  emission. The final piece of code (\textit{func start()}) defines the starting position of the player when the game starts.
 \end{enumerate}
+The next step in the version control is to merge changes in stream \textit{dev1.0} back to the \textit{main} stream. Currently,
+the Stream Graph in P4V looks like this.
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{copy-dev-to-main.png}
+    \caption{copy files from dev to main}
+    \label{fig:copy-dev-to-main}
+\end{figure}
+The green arrow means merge or copy operation is available. As for the terminology, "merge" means send changes from the 
+more stable stream (main) to the less stable one (dev) and "copy" means vica versa. This case, only the less stable stream
+\textit{dev} stream is changed, so only copy operation is needed. Gray arrow means no copy or merge operations are necessary.
+Right click on the target stream {$=>$} \textit{Copy files to main}. In the popup window, the workspace for the target stream
+has to be activated then click on \textit{Copy} to copy the files. Finally, the in the main stream, the changes from the 
+copy operation has to be submitted. With these steps, changes from the development branch are also saved in the main branch
+and branches are synchronised.
