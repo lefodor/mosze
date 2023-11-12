@@ -100,35 +100,50 @@ Sort out signals:
     \item Connect \textit{timeout()} signal of each Timer nodes to the main script.
 \end{itemize}
 Now, pressing F5 should run the game with a player character disappearing when being hit by an enemy.
+
 \subsection{Version control of final steps}
+Having done all the steps above, commit changes to the \textit{dev1.0} stream, the version control system shows the below
+picture: \hfill \break
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{copy-merge-main.png}
+    %\setlength{\belowcaptionskip}{-50pt}
     \caption{copy merge main}
     \label{fig:copy-merge-main}
 \end{figure}
-
+The orange arrow means there is a need to merge changes from the \textit{main} stream and only after this becomes possible 
+to copy files from the development stream back to main. \hfill \break
+Proceeding with the merge (downstream synchronization from more stable (main) stream towards less stable (development)
+stream), the below conflict is shown:
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{show-main-dev-conflict.png}
     \caption{show main dev conflict}
     \label{fig:show-main-dev-conflict}
 \end{figure}
+The conflicts are needed to be resolved manually to make sure the correct version is retained. The \textit{Resolve} pop-up
+window shows the possibilities to Accept Source/Target/Merged or Run Merge Tool. For all conflicts, the 'Accept Target'
+option was selected as only the \textit{dev1.0} stream was updated during development process, different versions in the 
+\textit{main} stream may only occur due to autosave method of the game engine. If not only one developer works on the project
+then the merge/copy history has to be checked and select the proper resolve method accordingly.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{resolve-main-dev-conflict.png}
+    \includegraphics[scale=0.5]{resolve-main-dev-conflict.png}
+    \setlength{\belowcaptionskip}{-10pt}
+    %\setlength{\intextsep}{5pt}
     \caption{resolve main dev conflict}
     \label{fig:resolve-main-dev-conflict}
 \end{figure}
 
+After resolving the conflicts, the copy method from the \textit{dev1.0} stream is possible (green arrow).
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{after-merge-conflicts-resolved.png}
     \caption{after merge conflicts resolved}
     \label{fig:after-merge-conflicts-resolved}
 \end{figure}
-
+As a last step, we can observe the change history for both \textit{main} and \textit{dev1.0} streams 
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{final-dev1-history.png}
