@@ -16,9 +16,9 @@ some or many aspects. \\
 The most straightforward distinction between version control systems is based on whether they treat code repository in 
 a centralized or distributed manner. The former designates an authorative data store and all activies/changes are 
 aligned with reference to this central hub. In the latter case, however, there is no authorative central repository.
-Code repositories are aligned by activies called merges when changes are combined creating a new repository version 
+Code repositories are aligned by activities called merges when changes are combined creating a new repository version 
 incorporating all modifications of the code base. \\
-Centralized version control system (CVCS) usually implements the following workflow \cite{atlass}:
+Centralized version control system (CVCS) usually implements the following workflow \cite{atlassian-vcs}:
 \begin{itemize}
     \item check out code repository from central location (usually from server) with all the changes made by other
     colleagues
@@ -31,13 +31,30 @@ DVCS works with the following typical workflow:
     \item clone repository with full history of changes
     \item make own changes
     \item commit changes to local repository
-    \item push changes to DVCS
+    \item push changes to DVCS and merge to main branch related to the activities
 \end{itemize}
-    \subsection{Subsection01}
-    ...
-
-    \subsection{Subsection02}
-    ...
-
-    %\subsubsection{Subsubsection $\Delta$}
-    ...
+Main risk of centralized VCS is related to the authorative repository. If the hosting environment of this repository is
+unavailable for whatever reasons, it can jeopardize productivity or even cause data loss. The distributed architecture
+is less prone to such events as it keeps the whole code base at each machine that checks out the repository.
+\subsection{Branching strategy}
+Another important aspect of version control is the applied method to keep and maintain different versions of the code base.
+As mentioned previously, different code versions/branches can be summarized as follows:
+\begin{itemize}
+    \item \textbf{main} (production): released version of the code, currently in production or in live environment
+    \item \textbf{release branch/release candidate}: in a periodic development cycle, there is usually an event, the so-called 
+    code freeze, after which a release branch is created that already contains all incremental changes of the software 
+    that are planned to go-live with upcoming release. All other changes, that are not part of next release but already
+    in progress stay in the development branch. After the release, the release branch can be archived. There can also
+    be situations when issues are identified after go-live and a hotfix needs to be issued using a \textbf{hotfix} branch.
+    \item \textbf{development} branch: all changes done by developers start in a development phase (development branch) 
+    and mature until they are tested and become ready to go-live (or get cancelled and removed from the repository).
+    Depending on the branching strategy and development situation, there can be one or several development branches,
+    including \textbf{feature} branches that are specific to a new functionality and represents a more extensive workload before
+    it can be released.
+\end{itemize}
+An important part of development workflow is the method used to create and organize these branches, execute merges. These
+activites are governed by the so-called branching strategy. There are several branching strategies that can be adopted,
+the final decision always depends on the nature of development project, available tools (e.g. ticketing system) etc.
+For further details can be found about Git branching strategy and workflow at \cite{gitflow-workflow}, or Microsoft's
+practice at \cite{ms-tfs-branching}, whereas Perforce's tool - which will be demonstrated in later sections - at 
+\cite{perforce-branching}.

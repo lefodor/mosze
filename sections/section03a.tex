@@ -11,7 +11,7 @@ traditional SW development workflow.
 \subsection{Setup Helix Core}
 The setup of Helix Core follows the instructions from the 
 \href{https://help.perforce.com/helix-core/quickstart/Content/quickstart/admin-install-linux.html}{\color{blue}{Helix Core Server Administrator Guide}}
-relevant for Linux (Ubuntu) systems. The following commands were issued for setting up the version control application, as 
+(or in \cite{helix} ) relevant for Linux (Ubuntu) systems. The following commands were issued for setting up the version control application, as 
 can be found in the aformentioned documentation.
 \begin{enumerate}
     \item Download perforce public key
@@ -88,7 +88,7 @@ can be found in the aformentioned documentation.
     \href{https://www.perforce.com/downloads/helix-visual-client-p4v}{\color{blue} Download Page}.
     P4v is the client application commnicating with the server. Server in this case is created on local machine. In case of
     reinstall, the P4V client might also need to be unpacked again so that the already created workspaces do not block
-    the execution.
+    the execution. For more information, check \cite{p4v}.
     \item Additional config steps
     \begin{verbatim}
         $ export P4PORT=ssl:1666
@@ -131,3 +131,4 @@ After downloading and unpacking, Godot is ready to use:
       \caption{godot editor}
       \label{fig:godot}
 \end{figure}
+The Godot Engine documentation including tutorials can be found in \cite{godot}.
