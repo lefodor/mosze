@@ -6,7 +6,7 @@ CI/CD principles. In this section, a new development branch (stream in Perforce'
 called main and all incremental development is done to the development branch which is later merged to the main one.
 \subsubsection{Setup new stream}
 In order to setup a new stream in Perforce, open the \textbf{Stream Graph} tab and right click on the blank area, then choose
-\textit{New Stream}. Configure the new stream on the based on the pop-up window as displayed below.
+\textit{New Stream}. Configure the new stream based on the pop-up window as displayed below.
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{new-stream-for-branching.png}
@@ -26,6 +26,7 @@ main stream. Also, changes need to be made to the workspace related to this bran
 \subsection{Coding the player scene and creating the enemy}
 %\begin{enumerate}[resume]
   %\item 
+  \paragraph{}
   \href{https://docs.godotengine.org/en/stable/getting_started/first_2d_game/03.coding_the_player.html}{\color{blue}Coding player scene}. 
   Add script to player by selecting the scene and click on the "Attach Script" button.
   \begin{figure}[H]
@@ -116,14 +117,14 @@ The green arrow means merge or copy operation is available. As for the terminolo
 more stable stream (main) to the less stable one (dev) and "copy" means vica versa. This case, only the less stable stream
 \textit{dev} stream is changed, so only copy operation is needed. Gray arrow means no copy or merge operations are necessary.
 Right click on the target stream {$=>$} \textit{Copy files to main}. In the popup window, the workspace for the target stream
-has to be activated then click on \textit{Copy} to copy the files. Finally, the in the main stream, the changes from the 
+has to be activated then click on \textit{Copy} to copy the files. Finally, in the main stream, the changes from the 
 copy operation has to be submitted. With these steps, changes from the development branch are also saved in the main branch
 and branches are synchronised.
 %\begin{enumerate}[resume]
   %\item 
+  \paragraph{}
   \href{https://docs.godotengine.org/en/stable/getting_started/first_2d_game/04.creating_the_enemy.html}{\color{blue}Creating the enemy}
-  Create enemy scene. Add behaviour and movement.
-  Create a new scene called "Mob", which will be instanced as many times as wished, in random locations of the screen and 
+  Create a new scene called "Mob", which will be instanced as many times as wished in random locations of the screen and 
   move in randomly selected directions. Click \textbf{Scene} {$=>$} \textbf{New Scene} and add the following structure:
   \begin{itemize}
     \item RigidBody2D (called Mob)

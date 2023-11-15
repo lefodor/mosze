@@ -1,10 +1,10 @@
 \section{Version control using Helix Core\textsuperscript{\texttrademark}} \label{case-study-1}
 In this section, a very basic 2D game is created with the game engine Godot. The development process is version 
 controlled using the Helix Core application to demonstrate the major steps and show the differences compared to 
-traditional SW development workflow.
+traditional SW development workflow. Some basic characteristics and definitions of the application:
 \begin{itemize}
     \item centralized version control system: files are maintained on centralized server
-    \item files are stored in depots: typically 1 depot per project
+    \item files are stored in shared repositories called depots on server: typically 1 depot per project
     \item workspace: mapping of relevant files between local machine and server
 \end{itemize}
 
@@ -38,7 +38,7 @@ can be found in the aformentioned documentation.
         deb http://package.perforce.com/apt/ubuntu focal release
     \end{verbatim}
     Make sure the version matches the Linux/Ubuntu version of the machine's system. E.g 'focal' needs to be replaced by
-    'jammy' if the most recent Linux/Ubuntu LTS version is running on the machine.
+    'jammy' if the most recent Linux/Ubuntu LTS version (as of 15-11-2023) is running on the machine.
     \item Update machine and install Helix Core
     \begin{verbatim}
         $ sudo apt-get update
@@ -104,7 +104,7 @@ can be found in the aformentioned documentation.
 \end{enumerate}
 Having done the above steps, the GUI can be launched bringing up the screen below. The location of the server (where
 all shared files/projects are stored) \colorbox{blue!30}{/opt/perforce/servers/master/root} 
-As the server is also created on local machine. This folder is used to create the mapping between server and other 
+as the server is also created on local machine. This folder is used to create the mapping between server and other 
 client machines and workspaces.
 \begin{figure}[H]
     \centering
